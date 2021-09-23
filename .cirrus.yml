@@ -1,20 +1,26 @@
-env: 
+environment: 
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: "/tmp/ci" 
 
-    rclone_config: "ENCRYPTED[d4e9954a9648237bce9c5d4b1361ef92c58aac777d2ef784f35b1059c50637eeea21c6af165541584a61a2a990a0825f]"
-    bot_api: "ENCRYPTED[bd5ae027c64950908d28f5a7447d1529e81954325525b51674dcd3431d71c6c4b4025c69cd748eeb3852f5f49c5f69d7]"
+    rclone_config: "ENCRYPTED[361f52a2ded83c9f36adb388247959eb6752b364d56c595b9b490f9224c06bfcd0fc63dc978739e60e8b34a77b28eb64]"
+    bot_api: "ENCRYPTED[21a1b3821387776b07a14b28053f9ce1914f8b50ced11a3c086618a67740ac3e8ec096da073e9e00ccfcf1b4154015f9]"
     
 task:
-    name: juice 
-    timeout_in: 120m # Otherwise it will timeout at 60m automatically, 120m highest in free account
+    name: hugo-110 
+    timeout_in: 120m
     container:
-      dockerfile: Dockerfile # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci 
+      dockerfile: Dockerfile
       cpu: 8 
-      memory: 32G 
-    download_ccache_background_script: 
-     - ./download_ccache 
-    sync_script: 
-      - ./sync 
-    build_uploads_script: 
-      - ./build_uploads 
+      memory: 30G 
+    cd_background_script: 
+     - ./cd 
+    ss_script: 
+      - ./ss 
+    mo_background_script:
+      - ./mo
+    br_script: 
+      - ./br 
+    bu_background_script:
+      - ./bu
+    cu_script:
+      - ./cu 
